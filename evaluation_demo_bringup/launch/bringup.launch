@@ -1,0 +1,18 @@
+<launch>
+    <arg name="project_path" default="~/shri_projects/evaluation_demo" />
+
+    <include file="$(find social_mind)/launch/bringup.launch">
+        <arg name="project_path" value="$(arg project_path)" />
+        <arg name="fake_render_speech" value="false" />
+    </include>
+
+    <node name="sp_speech_recognizer" type="percep_speech.py" pkg="evaluation_demo_perceptions" output="screen">
+        <param name="config_file" value="$(find evaluation_demo_perceptions)/config/percep_speech_conf.yaml" />
+    </node>
+
+    <node name="render_speech" type="render_speech.py" pkg="evaluation_demo_renders" output="screen" />
+
+    <include file="$(find google_cloud_speech)/launch/bringup.launch" />
+    <include file="$(find polly_speech)/launch/bringup.launch" />
+    <include file="$(find dialogflow_dialog)/launch/bringup.launch" />
+</launch>
