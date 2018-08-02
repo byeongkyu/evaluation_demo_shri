@@ -12,7 +12,10 @@
 
     <node name="render_speech" type="render_speech.py" pkg="evaluation_demo_renders" output="screen" />
 
-    <include file="$(find google_cloud_speech)/launch/bringup.launch" />
+    <include file="$(find google_cloud_speech)/launch/bringup.launch">
+        <arg name="always_listening" value="false"/>
+    </include>
+
     <include file="$(find polly_speech)/launch/bringup.launch" />
     <include file="$(find dialogflow_dialog)/launch/bringup.launch" />
 </launch>
